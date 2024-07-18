@@ -10,3 +10,10 @@ function obtenerDatosHTML(nombre)
 
 
 }
+
+function obtenerContactos()
+{
+    let hoja=SpreadsheetApp.openById('1Uuh-RHqLaiQ1mGCHUbBYiuGhSKMrdE8hrvMY2-uIHlM').getActiveSheet();
+    let datos=hoja.getDataRange().getValues();
+    return datos;
+}

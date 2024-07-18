@@ -4,7 +4,7 @@ function crearTablaContactos()
 {
     let tabla=document.getElementById('tablaContactos');
     if(tabla) tabla.remove();
-
+    
     google.script.run.withSuccessHandler(
         function(obj)
         {
@@ -15,15 +15,17 @@ function crearTablaContactos()
             let tablaHeader = document.createElement('thead');
             let tablaBody = document.createElement('tbody');
 
-            for(let i=0;i<obj.length;i++)
+            Array.from(obj).forEach((filaActual, i) =>
             {
                 let fila = document.createElement('tr');
-                for(let j=0;j<obj[i].length;j++)
+                filaActual.forEach(celdaActual =>
                 {
                     let celda = document.createElement('td');
-                    celda.textContent=obj[i][j];
+                    celda.textContent=celdaActual;
                     fila.appendChild(celda);
-                }    
+
+                }
+                );
                 if(i==0)
                 {
                     tablaHeader.appendChild(fila);
@@ -33,23 +35,9 @@ function crearTablaContactos()
                 {
                     tablaBody.appendChild(fila);
                 }
+                
             }
-
-            //Array.from(obj).forEach((filaActual, i) =>
-            //{
-            //    let fila = document.createElement('tr');
-            //    filaActual.forEach(celdaActual =>
-            //    {
-            //        let celda = document.createElement('td');
-            //        celda.textContent=celdaActual;
-            //        fila.appendChild(celda);
-
-            //    }
-            //    );
-            
-            //    
-            //}
-            //);
+            );
             
             //Agregamos clases a la cabecera
             tablaHeader.classList.add('table-dark');
